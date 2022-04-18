@@ -1,0 +1,66 @@
+{% extends "layout.twig" %}
+
+{% block name %}{{ data.user_login }}, sécurisez votre compte{% endblock %}
+{% block connecte %}{% endblock %}
+
+{% block content %}
+</br></br>
+<div class = "container">
+    <div class = "row">
+        <div class = "col">
+            <div class="card" style="width: 18rem;">
+                <img src="img/microsoft-authenticator.svg" class="card-img-top" alt="test">
+                <div class="card-body">
+                    <h5 class="card-title">Google Authenticator</h5>
+                    <p class="card-text">En activant ce second facteur d'authentication, vous sécuriserez d'avantage votre compte</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                {% if data.Factor2 is null %}
+                <form method="post" action="?a=factor2">
+                    <input type = "hidden" name = "hidden" value = "1"></input>
+                    <li class="list-group-item"><button type="submit" class="btn btn-success">Activer le Facteur2</button></li>
+                </form>
+                {% endif %}
+                {% if data.Factor2 is not null %}
+                <form method="post" action="?a=factor2">
+                    <input type = "hidden" name = "hiddenx" value = "1"></input>
+                    <li class="list-group-item"><button type="submit" class="btn btn-primary">Désactiver le Facteur2</button></li>
+                </form>
+                {% endif %}
+                    <li class="list-group-item"><button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'https://devbox.u-angers.fr/~nicomace2501/';">Revenir sur mon profil</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col">
+            {% if data.QRcode is not null %}
+            <div class="card" style="width: 18rem;">
+                <img src = {{ data.QRcode }}>
+                <div class="card-body">
+                    <h5 class="card-title">Scannez puis entrez le code</h5>
+                    <p class="card-text">En validant, vous activerez le 2FA qui vous sera demandé à chaque connexion, cette action sera reversible</p>
+                    <div class = "form-box"> 
+                        <form method = "post" action = "?a=factor2">
+                            <div class = "form-floating">
+                                <input id = "floatingInput" name = "usercode" type ="password" class = "form-control" placeholder = "000000"></input>
+                                <label for="floatingInput">Code</label>
+                            </div>
+                            <input type = "submit" value = "Valider" class = "btn btn-primary"></input>
+                        <form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if data.error is not null %}
+                <div>
+                    <p>{{ data.error }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,31 @@
+{% extends "layout.twig" %}
+
+{% block title %}GreenRose School{% endblock %}
+
+{% block banniere %}{% endblock %}
+
+{% block connecte %}{% endblock %}
+
+{% block content %}
+
+<div class="container login-dark">
+        <h2><span>G</span><span>reen </span> <span>R</span><span>ose</span> <span>S</span><span>chool</span></h2>
+        <div class="login-container">
+            <div id="output"></div>
+            <div class="avatar"></div>
+            <div class="form-box">
+                <form method="post" action="?a=register">
+                    <h2 class="sr-only">Login Form</h2>
+                    <div class="illustration"><i class="icon ion-ios-rose"></i></div>
+                    <div class="form-group"><input class="form-control" name="user" type="text" placeholder="Nom d'utilisateur"></div>
+                    <div class="form-group"><input class="form-control" name="pass" type="password" placeholder="Mot de passe"></div>
+                    <div class="form-group"><input class="form-control" name="name" type="text" placeholder="Nom"></div>
+                    <div class="form-group"><input class="form-control" name="firstname" type="text" placeholder="Prénom"></div>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">S'inscrire</button></div>
+                    <a class = "stylax" href = "https://devbox.u-angers.fr/~nicomace2501/">Déja inscrit ?</a>
+                </form>
+            </div>
+        </div>
+        
+</div>
+{% endblock %}

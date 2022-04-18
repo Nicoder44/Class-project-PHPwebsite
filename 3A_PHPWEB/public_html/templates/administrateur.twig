@@ -1,0 +1,73 @@
+{% extends "layout.twig" %}
+
+{% block title %}Profil de {{ data.user_login }}{% endblock %}
+
+{% block name %}Bonjour {{ data.user_login }}{% endblock %}
+
+{% block lien %}
+<form method="post" action="?a=show">
+    <button class="btn btn-outline-danger" type="submit">Mon profil</button>
+</form>
+{% endblock %}
+
+{% block content %}
+    <div class = "container">
+        <div class = "row"> 
+            <div class = "col">
+                <div class="form-box">
+                    <form method="post" action="?a=administrateur">
+                        <h5>Inscrire un nouveau membre</h5>
+                        <div class="form-group"><input class="form-control" name="user2" type="text" placeholder="Nom d'utilisateur"></div>
+                        <div class="form-group"><input class="form-control" name="pass2" type="password" placeholder="Mot de passe (à communiquer)"></div>
+                        <div class="form-group"><input class="form-control" name="name2" type="text" placeholder="Nom"></div>
+                        <div class="form-group"><input class="form-control" name="firstname2" type="text" placeholder="Prénom"></div>
+                        <div class="form-group">
+                            <label for = "role2">Role</label>
+                            <select id = "role2" class = "form-control" name = "role2">
+                                <option value = "0" selected>Etudiant</option>
+                                <option value = "1">Enseignant</option>
+                                <option value = "2">Administrateur</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Inscrire</button></div>
+                        {% if data.ajout is not null %}
+                            {{ data.ajout }}
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            <div class = "col">
+                <form method="post" action="?a=administrateur2">
+                    <h5>Changer le rôle d'un  membre</h5>
+                    <div class="form-group"><input class="form-control" name="usersearch" type="text" placeholder="Chercher un membre"></div>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Rechercher</button></div>
+                </form>
+                <form method = "post" action="?a=uploadrole">
+                    <div class="form-group">
+                        <select class = "form-control" name = "changemembre" id ="changemembre">
+                            {% if data.membres is null %}
+                                <option value = null selected>Selectionnez un membre</option>
+                            {% endif %}
+                            {% for membre in data.membres %}
+                                <option value = {{membre.login}}>
+                                 {{ membre.firstname }}, {{ membre.lastname }}, {{membre.login}}
+                                 </option>
+                            {% endfor %}
+                        </select>
+                        <label for = "role3">Role</label>
+                        <select id = "role3" class = "form-control" name = "role3">
+                            <option value = "0" selected>Etudiant</option>
+                            <option value = "1">Enseignant</option>
+                            <option value = "2">Administrateur</option>
+                        </select>
+                    </div>
+                    {% if data.messagerole is not null %}
+                        {{ data.messagerole}}
+                    {% endif %}
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Mettre à jour</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

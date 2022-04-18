@@ -1,0 +1,100 @@
+{% extends "layout.twig" %}
+
+{% block title %}Profil de {{ data.user_login }}{% endblock %}
+
+{% block name %}Bonjour {{ data.user_login }}{% endblock %}
+
+{% block lien %}
+<form method="post" action="?a=show">
+    <button class="btn btn-outline-danger" type="submit">Mon profil</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<div class = "container">
+    <div class = "row">
+        <div class = "col">
+            <h2><span>G</span><span>reen </span> <span>R</span><span>ose</span> <span>S</span><span>chool</span></h2>
+            <h5>Ajouter des notes</h5>
+            <form method="post" action="?a=enseignant">
+                <div class="form-group"><input class="form-control" name="usersearch" type="text" placeholder="Chercher un membre"></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Rechercher</button></div>
+            </form>
+            <form method="post" action="?a=enseignant">
+                <select class = "form-control" name = "eleve" id ="eleve">
+                    {% if data.membres is null %}
+                        <option value = null selected>Selectionnez un membre</option>
+                    {% endif %}
+                    {% for membre in data.membres %}
+                        <option value = {{membre.id}}>
+                            {{ membre.firstname }}, {{ membre.lastname }}, {{membre.login}}
+                            </option>
+                    {% endfor %}
+                </select>
+                <div class="form-group">
+                    <label for = "matiere">Discipline</label>
+                    <select class = "form-control" name = "matiere" id ="matiere">
+                        <option value = "1" selected>Mathématiques</option>
+                        <option value = "2">Developpement</option>
+                        <option value = "3">Anglais</option>
+                    </select>
+                </div>
+                <div class="form-group"><input class = "form-control" placeholder = "Note" type = "number" step ="0.01" id ="Note"name = "Note"></div>
+                <div class="form-group"><button class="btn btn-success btn-block" type="submit">Ajouter</button></div>
+            </form>
+        </div>
+        <div class = "col">
+            <h5>Notes de l'eleve</h5>
+            <form method = "post" action = "?a=enseignant">
+                <select class = "form-control" name = "eleve" id ="eleve">
+                    {% if data.membres is null %}
+                        <option value = null selected>Selectionnez un membre</option>
+                    {% endif %}
+                    {% for membre in data.membres %}
+                        <option value = {{membre.id}}>
+                            {{ membre.firstname }}, {{ membre.lastname }}, {{membre.login}}
+                            </option>
+                    {% endfor %}
+                </select>
+                <div class="form-group"><button class="btn btn-success btn-block" type="submit">Voir les notes</button></div>
+            </form>
+            </br>
+            <table class="table table-striped table-dark">
+                <thead>
+                <tr>
+                    <th>Matière</th>
+                    <th>Note</th>
+                    <th>Moyenne</th>
+                </tr>
+                </thead>
+                {% for note in data.notes2 %}
+                <tr> 
+                    <td>
+                        {{note.subjectname}}
+                    </td>
+                    <td>
+                        {{ note.note }} 
+                    </td>
+                    <td>
+                        <form method = "post" action = "?a=enseignant">
+                            <button type = "submit" class="btn btn-danger btn block">Supprimer</button>
+                            <hidden name = "supprime" id = "supprime" value = {{note.id}}></hidden>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr> 
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        {{data.moyenne2}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

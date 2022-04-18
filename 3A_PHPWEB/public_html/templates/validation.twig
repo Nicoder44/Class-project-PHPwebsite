@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+{% block title %}GreenRose School{% endblock %}
+{% block connecte %}{% endblock %}
+{% block banniere %}{% endblock %}
+{% block content %}
+
+<div class="container login-dark">
+        <h2><span>G</span><span>reen </span> <span>R</span><span>ose</span> <span>S</span><span>chool</span></h2>
+        <div class="login-container">
+            <div id="output"></div>
+            <div class="avatar"></div>
+            <div class="form-box">
+                <form method="post" action="?a=validation2">
+                    <h2 class="sr-only">Login Form</h2>
+                    <div class="illustration"><i class="icon ion-ios-rose"></i></div>
+                    <div class="form-group"><input class="form-control" name="code6" type="text" placeholder="Type : 000000"></div>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Valider</button></div>
+                </form>
+            </div>
+        </div>
+        
+</div>
+<form method="post" action="?a=logout">
+    <div class="form-group"><button class="btn btn-danger btn-block">Annuler</button></div>
+</form>
+{% endblock %}

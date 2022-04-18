@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+
+{% block title %}Profil de {{ data.user_login }}{% endblock %}
+
+{% block name %}Bonjour {{ data.user_login }}{% endblock %}
+
+{% block content %}
+Voici l'ensemble des notes de {{ data.user_login }}<br/>
+<br/>
+<table class="table table-striped">
+<thead>
+   <tr>
+      <th>Matière</th>
+      <th>Note</th>
+      <th>Moyenne</th>
+   </tr>
+</thead>
+   {% for note in data.notes %}
+   <tr> 
+      <td>
+          {{note.subjectname}}
+      </td>
+      <td>
+          {{ note.note }} 
+      </td>
+      <td>
+      </td>
+   </tr>
+   {% endfor %}
+   <tr> 
+      <td>
+         Total
+      </td>
+      <td>
+      </td>
+      <td>
+         {{data.moyenne}}
+      </td>
+   </tr>
+</table>
+<form method="post" action="?a=logout">
+   <input type="submit" value="Déconnexion" class="btn btn-danger">
+</form>
+{% endblock %}
+
